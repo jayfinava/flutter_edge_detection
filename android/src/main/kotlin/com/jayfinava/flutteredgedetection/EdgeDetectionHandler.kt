@@ -10,6 +10,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import android.net.Uri
 
 class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultListener {
     private var activityPluginBinding: ActivityPluginBinding? = null
@@ -65,7 +66,24 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         if (requestCode == REQUEST_CODE) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    finishWithSuccess(true)
+                    // Check if this is from gallery selection
+                    if (data?.data != null && methodCall?.method == "edge_detect_gallery") {
+                        // Launch ScanActivity with the selected image
+                        val scanIntent = Intent(getActivity()?.applicationContext, com.jayfinava.flutteredgedetection.scan.ScanActivity::class.java)
+                        val bundle = Bundle().apply {
+                            putString(SAVE_TO, methodCall?.argument<String>(SAVE_TO))
+                            putString(CROP_TITLE, methodCall?.argument<String>(CROP_TITLE))
+                            putString(CROP_BLACK_WHITE_TITLE, methodCall?.argument<String>(CROP_BLACK_WHITE_TITLE))
+                            putString(CROP_RESET_TITLE, methodCall?.argument<String>(CROP_RESET_TITLE))
+                            putBoolean(FROM_GALLERY, true)
+                            putParcelable("SELECTED_IMAGE_URI", data.data)
+                        }
+                        scanIntent.putExtra(INITIAL_BUNDLE, bundle)
+                        getActivity()?.startActivityForResult(scanIntent, REQUEST_CODE)
+                        return true
+                    } else {
+                        finishWithSuccess(true)
+                    }
                 }
                 Activity.RESULT_CANCELED -> {
                     finishWithSuccess(false)
@@ -107,8 +125,7 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
             return
         }
         
-        val initialIntent = Intent(getActivity()?.applicationContext, ScanActivity::class.java)
-
+        // Store the arguments for later use when gallery image is selected
         val bundle = Bundle().apply {
             putString(SAVE_TO, call.argument<String>(SAVE_TO))
             putString(CROP_TITLE, call.argument<String>(CROP_TITLE))
@@ -116,10 +133,14 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
             putString(CROP_RESET_TITLE, call.argument<String>(CROP_RESET_TITLE))
             putBoolean(FROM_GALLERY, true)
         }
-
-        initialIntent.putExtra(INITIAL_BUNDLE, bundle)
-
-        getActivity()?.startActivityForResult(initialIntent, REQUEST_CODE)
+        
+        // Store bundle in a temporary location or pass it through intent
+        val galleryIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+            type = "image/*"
+            putExtra(INITIAL_BUNDLE, bundle)
+        }
+        
+        getActivity()?.startActivityForResult(galleryIntent, REQUEST_CODE)
     }
 
     private fun setPendingMethodCallAndResult(

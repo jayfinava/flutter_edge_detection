@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
         'edge_detection_${DateTime.now().millisecondsSinceEpoch}.jpeg',
       );
 
-      final success = await FlutterEdgeDetection.detectEdges(
+      final success = await FlutterEdgeDetection.detectEdge(
         imagePath,
         canUseGallery: true,
         androidScanTitle: 'Scanning',
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
       }
-    } on FlutterEdgeDetectionException catch (e) {
+    } on EdgeDetectionException catch (e) {
       if (mounted) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
         'edge_detection_${DateTime.now().millisecondsSinceEpoch}.jpeg',
       );
 
-      final success = await FlutterEdgeDetection.detectEdgesFromGallery(
+      final success = await FlutterEdgeDetection.detectEdgeFromGallery(
         imagePath,
         androidCropTitle: 'Crop',
         androidCropBlackWhiteTitle: 'Black White',
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
       }
-    } on FlutterEdgeDetectionException catch (e) {
+    } on EdgeDetectionException catch (e) {
       if (mounted) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(

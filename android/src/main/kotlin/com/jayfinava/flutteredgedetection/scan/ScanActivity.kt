@@ -79,7 +79,21 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
 
         if (initialBundle.containsKey(EdgeDetectionHandler.FROM_GALLERY) && initialBundle.getBoolean(EdgeDetectionHandler.FROM_GALLERY,false))
         {
-            pickupFromGallery()
+            // Check if we have a pre-selected image URI
+            val selectedImageUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                initialBundle.getParcelable("SELECTED_IMAGE_URI", android.net.Uri::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                initialBundle.getParcelable("SELECTED_IMAGE_URI")
+            }
+            if (selectedImageUri != null) {
+                // Process the pre-selected image directly
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    onImageSelected(selectedImageUri)
+                }
+            } else {
+                pickupFromGallery()
+            }
         }
     }
 

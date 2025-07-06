@@ -19,7 +19,7 @@ class FlutterEdgeDetection {
   /// [androidCropReset] is the title for the reset button on Android.
   ///
   /// Returns `true` if the operation was successful, `false` otherwise.
-  static Future<bool> detectEdges(
+  static Future<bool> detectEdge(
     String saveTo, {
     bool canUseGallery = true,
     String androidScanTitle = 'Scanning',
@@ -38,7 +38,7 @@ class FlutterEdgeDetection {
       });
       return result ?? false;
     } on PlatformException catch (e) {
-      throw FlutterEdgeDetectionException(
+      throw EdgeDetectionException(
         code: e.code,
         message: e.message ?? 'Unknown error occurred',
         details: e.details,
@@ -54,7 +54,7 @@ class FlutterEdgeDetection {
   /// [androidCropReset] is the title for the reset button on Android.
   ///
   /// Returns `true` if the operation was successful, `false` otherwise.
-  static Future<bool> detectEdgesFromGallery(
+  static Future<bool> detectEdgeFromGallery(
     String saveTo, {
     String androidCropTitle = 'Crop',
     String androidCropBlackWhiteTitle = 'Black White',
@@ -70,7 +70,7 @@ class FlutterEdgeDetection {
       });
       return result ?? false;
     } on PlatformException catch (e) {
-      throw FlutterEdgeDetectionException(
+      throw EdgeDetectionException(
         code: e.code,
         message: e.message ?? 'Unknown error occurred',
         details: e.details,
@@ -80,7 +80,7 @@ class FlutterEdgeDetection {
 }
 
 /// Exception thrown when edge detection operations fail.
-class FlutterEdgeDetectionException implements Exception {
+class EdgeDetectionException implements Exception {
   /// The error code.
   final String code;
 
@@ -90,12 +90,12 @@ class FlutterEdgeDetectionException implements Exception {
   /// Additional error details.
   final dynamic details;
 
-  const FlutterEdgeDetectionException({
+  const EdgeDetectionException({
     required this.code,
     required this.message,
     this.details,
   });
 
   @override
-  String toString() => 'FlutterEdgeDetectionException($code, $message)';
+  String toString() => 'EdgeDetectionException($code, $message)';
 }

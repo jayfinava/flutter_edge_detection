@@ -37,7 +37,7 @@ void main() {
       const blackWhiteTitle = 'Custom BW';
       const resetTitle = 'Custom Reset';
 
-      final result = await FlutterEdgeDetection.detectEdges(
+      final result = await FlutterEdgeDetection.detectEdge(
         saveTo,
         canUseGallery: canUseGallery,
         androidScanTitle: scanTitle,
@@ -65,7 +65,7 @@ void main() {
       const blackWhiteTitle = 'Custom BW';
       const resetTitle = 'Custom Reset';
 
-      final result = await FlutterEdgeDetection.detectEdgesFromGallery(
+      final result = await FlutterEdgeDetection.detectEdgeFromGallery(
         saveTo,
         androidCropTitle: cropTitle,
         androidCropBlackWhiteTitle: blackWhiteTitle,
