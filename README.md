@@ -175,11 +175,6 @@ Add the following keys to your `ios/Runner/Info.plist`:
 
 See the `example/` directory for a complete working example.
 
-## Screenshots
-
-![Android Screenshots](screenshots/android/)
-![iOS Screenshots](screenshots/ios/)
-
 ## Contributing
 
 1. Fork the repository
