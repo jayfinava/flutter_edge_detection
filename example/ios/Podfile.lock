@@ -1,0 +1,47 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_edge_detection (1.0.0):
+    - Flutter
+    - WeScan
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - permission_handler_apple (9.3.0):
+    - Flutter
+  - WeScan (3.0.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_edge_detection (from `.symlinks/plugins/flutter_edge_detection/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - WeScan (from `.symlinks/plugins/flutter_edge_detection/ios/WeScan-3.0.0`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_edge_detection:
+    :path: ".symlinks/plugins/flutter_edge_detection/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  WeScan:
+    :path: ".symlinks/plugins/flutter_edge_detection/ios/WeScan-3.0.0"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_edge_detection: 26dc646ed03a3c30b61df7bdf5168b0ce95fb99c
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  WeScan: f50277f7304d146d9ebc4ebdc1b587df84dcdd8b
+
+PODFILE CHECKSUM: 302bcf783ad9535561de9f54c7a2bfc2ad6ac7d1
+
+COCOAPODS: 1.15.2
