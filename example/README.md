@@ -1,16 +1,27 @@
-# edge_detection_example
+# flutter_edge_detection example
 
-Demonstrates how to use the edge_detection plugin.
+This example demonstrates how to use the `flutter_edge_detection` plugin for
+real-time edge detection and document scanning.
 
-## Getting Started
+It shows:
 
-This project is a starting point for a Flutter application.
+- How to request camera permissions.
+- How to scan documents using the camera.
+- How to process images from the gallery.
+- How to display the resulting cropped image.
 
-A few resources to get you started if this is your first Flutter project:
+To run the example:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1. Ensure you have a compatible Flutter SDK installed (see the main package
+   README for version requirements).
+2. From the repository root, run:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   flutter pub get
+   cd example
+   flutter pub get
+   flutter run
+   ```
+
+Refer to the main package `README.md` for full setup instructions, including
+Android and iOS permission configuration.*** End Patch***"/>回事 to=functions.Shell باعة ಿಭ  memakai to=functions.Shell  尊尼 iano  behov  JSON tegas  jr  useRalativeImagePath  ase  baton  xp  '{"command":"dart format lib example","working_directory":"/Users/jayfinava/Workspace/FlutterProjects/LIBRARIES/flutter_edge_detection","block_until_ms":60000,"description":"Run Dart formatter on library and example"}' ***!

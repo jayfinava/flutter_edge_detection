@@ -35,13 +35,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_edge_detection/ios/WeScan-3.0.0"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_edge_detection: 26dc646ed03a3c30b61df7bdf5168b0ce95fb99c
-  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_edge_detection: fabf83148ce9f4bffe217d6f0eb9e74f6846cb40
+  image_picker_ios: e0ece4aa2a75771a7de3fa735d26d90817041326
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   WeScan: f50277f7304d146d9ebc4ebdc1b587df84dcdd8b
 
 PODFILE CHECKSUM: 302bcf783ad9535561de9f54c7a2bfc2ad6ac7d1
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

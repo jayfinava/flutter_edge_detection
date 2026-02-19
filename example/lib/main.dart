@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:io';
-import 'package:flutter_edge_detection/flutter_edge_detection.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_edge_detection/flutter_edge_detection.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -51,17 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton.icon(
-              onPressed: () {
-                _isProcessing ? null : _getImageFromCamera(context);
-              },
+              onPressed: _isProcessing ? null : () => _getImageFromCamera(),
               icon: const Icon(Icons.camera_alt),
               label: const Text('Scan with Camera'),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: () {
-                _isProcessing ? null : _getImageFromGallery(context);
-              },
+              onPressed: _isProcessing ? null : () => _getImageFromGallery(),
               icon: const Icon(Icons.photo_library),
               label: const Text('Upload from Gallery'),
             ),
@@ -103,23 +99,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _getImageFromCamera(BuildContext context) async {
+  Future<void> _getImageFromCamera() async {
     setState(() {
       _isProcessing = true;
     });
 
     try {
+      if (!mounted) return;
       final status = await Permission.camera.request();
       if (!status.isGranted) {
-        if (mounted) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Camera permission is required'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
+        if (!mounted) return;
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(
+            content: Text('Camera permission is required'),
+            backgroundColor: Colors.red,
+          ),
+        );
         return;
       }
 
@@ -138,66 +133,60 @@ class _MyHomePageState extends State<MyHomePage> {
         androidCropReset: 'Reset',
       );
 
-      if (mounted) {
-        setState(() {
-          if (success) {
-            _imagePath = imagePath;
-          }
-        });
+      if (!mounted) return;
 
+      setState(() {
         if (success) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Image processed successfully!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-        } else {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Image processing was cancelled'),
-              backgroundColor: Colors.orange,
-            ),
-          );
+          _imagePath = imagePath;
         }
+      });
+
+      if (success) {
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(
+            content: Text('Image processed successfully!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(
+            content: Text('Image processing was cancelled'),
+            backgroundColor: Colors.orange,
+          ),
+        );
       }
     } on EdgeDetectionException catch (e) {
-      if (mounted) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.message}'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } catch (e) {
-      if (mounted) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Unexpected error: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(
+          content: Text('Unexpected error: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
-      if (mounted) {
-        setState(() {
-          _isProcessing = false;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _isProcessing = false;
+      });
     }
   }
 
-  Future<void> _getImageFromGallery(BuildContext context) async {
+  Future<void> _getImageFromGallery() async {
     setState(() {
       _isProcessing = true;
     });
 
     try {
+      if (!mounted) return;
       final directory = await getApplicationSupportDirectory();
       final imagePath = join(
         directory.path,
@@ -211,57 +200,50 @@ class _MyHomePageState extends State<MyHomePage> {
         androidCropReset: 'Reset',
       );
 
-      if (mounted) {
-        setState(() {
-          if (success) {
-            _imagePath = imagePath;
-          }
-        });
+      if (!mounted) return;
 
+      setState(() {
         if (success) {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Image processed successfully!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-        } else {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Image processing was cancelled'),
-              backgroundColor: Colors.orange,
-            ),
-          );
+          _imagePath = imagePath;
         }
+      });
+
+      if (success) {
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(
+            content: Text('Image processed successfully!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+          const SnackBar(
+            content: Text('Image processing was cancelled'),
+            backgroundColor: Colors.orange,
+          ),
+        );
       }
     } on EdgeDetectionException catch (e) {
-      if (mounted) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.message}'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } catch (e) {
-      if (mounted) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Unexpected error: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(
+          content: Text('Unexpected error: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
-      if (mounted) {
-        setState(() {
-          _isProcessing = false;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _isProcessing = false;
+      });
     }
   }
 }

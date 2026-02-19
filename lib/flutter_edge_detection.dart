@@ -1,24 +1,33 @@
-/// A Flutter plugin for real-time edge detection and document scanning with advanced image processing capabilities.
+/// A Flutter plugin for real-time edge detection and document scanning
+/// with advanced image processing capabilities.
 library flutter_edge_detection;
-
-import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-/// A Flutter plugin for real-time edge detection and document scanning with advanced image processing capabilities.
+/// Provides static methods for performing edge detection and document scanning.
+///
+/// Use [detectEdge] to launch a live camera scanner and [detectEdgeFromGallery]
+/// to process an image selected from the device gallery.
 class FlutterEdgeDetection {
   static const MethodChannel _channel = MethodChannel('flutter_edge_detection');
 
-  /// Call this method to scan the object edge in live camera.
+  /// Scans an object using the device camera with edge detection.
   ///
-  /// [saveTo] is the file path where the cropped image will be saved.
-  /// [canUseGallery] determines if the user can switch to gallery mode.
-  /// [androidScanTitle] is the title for the scan screen on Android.
-  /// [androidCropTitle] is the title for the crop button on Android.
-  /// [androidCropBlackWhiteTitle] is the title for the black/white filter button on Android.
-  /// [androidCropReset] is the title for the reset button on Android.
+  /// The cropped image is written to [saveTo], which must be a writable,
+  /// absolute file path (for example, a path inside
+  /// `getApplicationSupportDirectory()`).
   ///
-  /// Returns `true` if the operation was successful, `false` otherwise.
+  /// The [canUseGallery] flag determines whether the user can switch to the
+  /// gallery from the camera UI.
+  ///
+  /// On Android, you can customize the scan UI by providing localized titles
+  /// for [androidScanTitle], [androidCropTitle],
+  /// [androidCropBlackWhiteTitle], and [androidCropReset].
+  ///
+  /// Returns `true` if the operation was successful and the image was saved,
+  /// or `false` if the user cancelled the flow.
+  ///
+  /// Throws an [EdgeDetectionException] if the underlying platform call fails.
   static Future<bool> detectEdge(
     String saveTo, {
     bool canUseGallery = true,
@@ -46,14 +55,20 @@ class FlutterEdgeDetection {
     }
   }
 
-  /// Call this method to scan the object edge from a gallery image.
+  /// Scans an object from an existing gallery image with edge detection.
   ///
-  /// [saveTo] is the file path where the cropped image will be saved.
-  /// [androidCropTitle] is the title for the crop button on Android.
-  /// [androidCropBlackWhiteTitle] is the title for the black/white filter button on Android.
-  /// [androidCropReset] is the title for the reset button on Android.
+  /// The cropped image is written to [saveTo], which must be a writable,
+  /// absolute file path (for example, a path inside
+  /// `getApplicationSupportDirectory()`).
   ///
-  /// Returns `true` if the operation was successful, `false` otherwise.
+  /// On Android, you can customize the crop UI by providing localized titles
+  /// for [androidCropTitle], [androidCropBlackWhiteTitle], and
+  /// [androidCropReset].
+  ///
+  /// Returns `true` if the operation was successful and the image was saved,
+  /// or `false` if the user cancelled the flow.
+  ///
+  /// Throws an [EdgeDetectionException] if the underlying platform call fails.
   static Future<bool> detectEdgeFromGallery(
     String saveTo, {
     String androidCropTitle = 'Crop',
@@ -81,15 +96,16 @@ class FlutterEdgeDetection {
 
 /// Exception thrown when edge detection operations fail.
 class EdgeDetectionException implements Exception {
-  /// The error code.
+  /// The error code returned by the platform implementation.
   final String code;
 
-  /// The error message.
+  /// A human-readable description of the error.
   final String message;
 
-  /// Additional error details.
+  /// Additional platform-specific error details, if available.
   final dynamic details;
 
+  /// Creates a new [EdgeDetectionException].
   const EdgeDetectionException({
     required this.code,
     required this.message,

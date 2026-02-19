@@ -14,8 +14,8 @@ A Flutter plugin to detect edges of objects, scan paper, detect corners, and det
 
 ## Requirements
 
-- Flutter: >=3.27.0
-- Dart: >=3.0.0
+- Flutter: >=3.35.7
+- Dart: >=3.7.0
 - Android: API level 21+ (Android 5.0+)
 - iOS: 13.0+
 
@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_edge_detection: ^1.0.0
+  flutter_edge_detection: ^1.1.0
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ import 'package:flutter_edge_detection/flutter_edge_detection.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
-// Scan with camera
+/// Scan with camera and save the cropped document image.
 Future<void> scanWithCamera() async {
   try {
     final directory = await getApplicationSupportDirectory();
@@ -48,7 +48,7 @@ Future<void> scanWithCamera() async {
 
     final success = await FlutterEdgeDetection.detectEdge(
       imagePath,
-      canUseGallery: true,
+      canUseGallery: true, // Allow switching to gallery from the camera UI.
       androidScanTitle: 'Scanning',
       androidCropTitle: 'Crop',
       androidCropBlackWhiteTitle: 'Black White',
@@ -65,7 +65,7 @@ Future<void> scanWithCamera() async {
   }
 }
 
-// Scan from gallery
+/// Scan from a gallery image and save the cropped document image.
 Future<void> scanFromGallery() async {
   try {
     final directory = await getApplicationSupportDirectory();

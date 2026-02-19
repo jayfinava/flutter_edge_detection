@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0] - 2026-02-19
+
+- Update Dart and Flutter SDK constraints to support the latest stable releases (Dart >=3.7.0, Flutter >=3.35.7).
+- Update dependencies to current stable versions:
+  - image_picker: ^1.2.1
+  - path_provider: ^2.1.5
+  - permission_handler: ^12.0.1
+- Improve public API documentation comments in `flutter_edge_detection.dart`.
+- Refine example app:
+  - Follow Dart and Flutter best practices.
+  - Remove `use_build_context_synchronously` ignores by restructuring async code.
+  - Improve example README with concrete usage and run instructions.
+- Run `dart format` over library and example sources.
+
 ## [1.0.2] - 2024-06-19
 
 - Update dependencies to latest versions:
