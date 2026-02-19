@@ -10,7 +10,8 @@ void main() {
 
   setUp(() {
     log.clear();
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
       log.add(methodCall);
       // Return appropriate types based on method
       switch (methodCall.method) {
@@ -25,7 +26,8 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   group('FlutterEdgeDetection', () {
@@ -59,7 +61,8 @@ void main() {
       expect(result, true);
     });
 
-    test('detectEdgesFromGallery calls correct method with parameters', () async {
+    test('detectEdgesFromGallery calls correct method with parameters',
+        () async {
       const saveTo = '/test/path/result.jpg';
       const cropTitle = 'Custom Crop';
       const blackWhiteTitle = 'Custom BW';

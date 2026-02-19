@@ -28,3 +28,4 @@ analyzer:
     - "**/generated_plugin_registrant.dart"
   errors:
     invalid_annotation_target: ignore
+    control_flow_in_finally: ignore
