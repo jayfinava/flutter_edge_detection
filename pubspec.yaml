@@ -1,6 +1,6 @@
 name: flutter_edge_detection
 description: A Flutter plugin for real-time edge detection and document scanning with advanced image processing capabilities.
-version: 1.1.0
+version: 1.2.0
 homepage: https://github.com/jayfinava/flutter_edge_detection
 
 environment:

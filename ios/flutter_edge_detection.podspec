@@ -4,8 +4,8 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_edge_detection'
-  s.version          = '1.0.0'
-  s.summary          = 'Plugin to detect edges of objects'
+  s.version          = '1.2.0'
+  s.summary          = 'A Flutter plugin for real-time edge detection and document scanning.'
   s.description      = <<-DESC
 A Flutter plugin for real-time edge detection and document scanning with advanced image processing capabilities.
                        DESC

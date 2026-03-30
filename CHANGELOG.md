@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.0] - 2026-03-30
+
+- **Fix**: Support 16 KB memory page size for Android 15+ compatibility.
+- Update Android build toolchain:
+  - Android Gradle Plugin (AGP): 8.5.1
+  - NDK: r28 (28.0.12433510)
+  - Kotlin: 1.9.24
+- Modernize OpenCV dependency:
+  - Migrate from `com.quickbirdstudios:opencv:3.4.5` to official `org.opencv:opencv:4.13.0`.
+- Improve native library packaging configuration for reliable 16 KB segment alignment.
+
 ## [1.1.0] - 2026-02-19
 
 - Update Dart and Flutter SDK constraints to support the latest stable releases (Dart >=3.7.0, Flutter >=3.35.7).
